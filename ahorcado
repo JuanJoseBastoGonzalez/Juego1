@@ -1,0 +1,46 @@
+palabra = "joseb"
+letras_adivinadas = []
+vidas = 3
+x=0
+opciones = ("SI", "NO")
+def mostrar_letras_adivinadas(palabra, letras_adivinadas):
+    resultado = ''
+    for letra in palabra:
+        if letra in letras_adivinadas:
+            resultado += letra + ' '
+        else:
+            resultado += '_ '
+    return resultado
+while vidas > 0:
+    ingresar_pala = input("Desea ingresar una palabra? (SI/NO): ").upper()
+    while ingresar_pala != opciones[0] and ingresar_pala != opciones[1]:
+        print("Caracter inválido. Intente de nuevo.")
+        ingresar_pala = input("¿Desea ingresar una palabra? (SI/NO): ").upper()
+    if ingresar_pala == opciones[0]:
+        palabra_usuario = input("Ingrese su palabra: \n").lower()
+        if palabra_usuario == palabra:
+            print("¡PALABRA CORRECTA!")
+            break
+        else:
+            vidas -= 1
+            print("Palabra incorrecta. Vidas restantes:", vidas)
+            if vidas == 0:
+                print("Has agotado tus vidas. Fin del juego.")
+                break
+    elif ingresar_pala == opciones[1]:
+        letra_usuario = input("Ingrese una letra: ").lower()
+        if letra_usuario in palabra:
+            print("¡Letra encontrada!")
+            letras_adivinadas.append(letra_usuario)
+            resultado_actual = mostrar_letras_adivinadas(palabra, letras_adivinadas)
+            print("Palabra a adivinar:", resultado_actual)
+            x +=1
+            if x == len(palabra):
+              print("¡PALABRA CORRECTA!")
+              break
+        else:
+            vidas -= 1
+            print("Letra incorrecta. Vidas restantes:", vidas)
+            if vidas == 0:
+                print("Has agotado tus vidas. Fin del juego.")
+                break
